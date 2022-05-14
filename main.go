@@ -1,7 +1,11 @@
 package main
 
+import "log"
+
 func main() {
-	/*
-		Read /proc/net/tcp every 10 seconds and report new connections
-	*/
+	var filename string = "/proc/net/tcp"
+	err := report(filename)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
