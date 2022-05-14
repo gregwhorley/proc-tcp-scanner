@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   dependency-review:
-    runs-on: golang:bullseye
+    runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'
         uses: actions/checkout@v3
