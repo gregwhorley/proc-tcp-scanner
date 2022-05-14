@@ -10,10 +10,12 @@ with the following format:
 ## Build
 ### Go binary
 Requires go 1.18+
+
 `go build -v ./...`
 
 ### Docker
 If go isn't installed, you can build the binary inside a Docker image
+
 `docker build -t pts:latest -f Dockerfile .`
 
 ## Test
