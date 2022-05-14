@@ -10,8 +10,19 @@ with the following format:
 ## Build
 ### Go binary
 Requires go 1.18+
-`go build`
+`go build -v ./...`
 
 ### Docker
-If go isn't installed, build and run in a Docker container
-`docker run -f Dockerfile .`
+If go isn't installed, you can build the binary inside a Docker image
+`docker build -t pts:latest -f Dockerfile .`
+
+## Test
+`go test -v ./...`
+
+## Run
+Depending on how the app was [built](README.md#build)
+### Go binary
+`./proc-tcp-scanner`
+
+### Docker
+`docker run pts:latest`
