@@ -47,8 +47,6 @@ func extractLines(filename string) (ext extracted) {
 				remoteIp:   re.ReplaceAllString(scanner.Text(), matchedRemoteIp),
 				remotePort: re.ReplaceAllString(scanner.Text(), matchedRemotePort),
 			})
-		} else {
-			log.Print("Incoming data did not match")
 		}
 	}
 	return ext

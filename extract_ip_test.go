@@ -38,17 +38,16 @@ func TestExtractLine(t *testing.T) {
 	}
 }
 
-// TODO: figure out proper way to test empty struct
 func TestNoMatch(t *testing.T) {
 	badFile := "badFile.txt"
 	ioutil.WriteFile(badFile, []byte("jdskjdks sdkfjsdkfjsdkj jfjfjfjf"), 0644)
 	defer os.Remove(badFile)
 	uhOh = extractLines(badFile)
 	for _, item := range uhOh {
-		if (ipAndPort{}) == item {
-			t.Log("empty struct")
+		if item.localIp == "" && item.localPort == "" {
+			t.Log("Expected empty struct values")
 		} else {
-			t.Error("Struct should be empty")
+			t.Error("Struct values should be empty")
 		}
 	}
 }
