@@ -2,28 +2,23 @@ package main
 
 import (
 	"encoding/hex"
-	"fmt"
+	"errors"
 	"log"
+	"net"
 )
 
-func convertIp(s string) string {
+func convertIp(s string) (string, error) {
+	// assuming this will always be an 8 char hex string that represents an IPv4 address
 	if len(s) > 8 {
-		log.Fatalln("Invalid length of hex string")
+		return "", errors.New("Invalid length of hex string")
 	}
-	var convertedIp string
-	for i := 0; i < len(s); i += 2 {
-		decoded, err := hex.DecodeString(s[i : i+2])
-		if err != nil {
-			log.Fatal(err)
-		}
-		// hacky way to format ipv4 address without appending a dot at the end
-		if i < 6 {
-			convertedIp += fmt.Sprintf("%d.", decoded)
-		} else {
-			convertedIp += fmt.Sprintf("%d", decoded)
-		}
+	decoded, err := hex.DecodeString(s)
+	if err != nil {
+		log.Fatalln(err)
 	}
-	return convertedIp
+	// assuming decoded will always be a fixed length byte slice representing an IPv4 address
+	ipv4 := net.IPv4(decoded[0], decoded[1], decoded[2], decoded[3])
+	return ipv4.String(), nil
 }
 
 func convertPort(s string) string {
