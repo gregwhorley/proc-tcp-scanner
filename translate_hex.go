@@ -5,6 +5,7 @@ import (
 	"errors"
 	"log"
 	"net"
+	"strconv"
 )
 
 func convertIp(s string) (string, error) {
@@ -21,10 +22,28 @@ func convertIp(s string) (string, error) {
 	return ipv4.String(), nil
 }
 
-func convertPort(s string) string {
-	return ""
+func convertPort(s string) (int64, error) {
+	if len(s) > 4 {
+		return 0, errors.New("Invalid length of hex string")
+	}
+	res, err := strconv.ParseInt(s, 16, 0)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return res, nil
 }
 
-func flipIp(s string) string {
-	return ""
+/*
+Assuming this will only be run on x86 cpu arch.
+Better to do an arch check so endianness can be determined instead of blindly flipping hex around.
+*/
+func flipIp(s string) (string, error) {
+	if len(s) > 8 {
+		return "", errors.New("Invalid length of hex string")
+	}
+	runes := []rune(s)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes), nil
 }
