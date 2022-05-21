@@ -11,21 +11,21 @@ with the following format:
 ### Go binary
 Requires go 1.18+. Compiled artifact will show up in the `build/` directory.
 
-`make build`
+Run `make` to build the binary.
 
 ### Docker
 If go isn't installed, you can build the binary inside a Docker image. The image will automatically
 be tagged as `pts:latest`.
 
-`make docker-build`
+Run `make docker-build` to create a Docker image with the compiled binary contained within.
 
 ## Test
-`make test`
+Run `make test` to run unit and integration tests.
 
 ## Run
 Depending on how the app was [built](README.md#build)
 ### Go binary
-`./build/proc-tcp-scanner`
+`./build/pts`
 
 ### Docker
 `docker run pts:latest`
