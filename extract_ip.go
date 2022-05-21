@@ -8,13 +8,6 @@ import (
 	"regexp"
 )
 
-/*
-	Read in the file contents line by line
-	Extract the local address (2nd word) and remote address (3rd word) using regexp
-	Convert hex to string representation of ip and port
-	Pretty print it
-*/
-
 type ipAndPort struct {
 	localIp    string
 	localPort  string
