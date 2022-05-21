@@ -15,9 +15,7 @@ type ipAndPort struct {
 	remotePort string
 }
 
-type extracted []ipAndPort
-
-func extractLines(filename string) (ext extracted) {
+func extractLines(filename string) (extracted []ipAndPort) {
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Fatalln(err)
@@ -34,7 +32,7 @@ func extractLines(filename string) (ext extracted) {
 			matchedLocalPort := fmt.Sprintf("${%s}", re.SubexpNames()[2])
 			matchedRemoteIp := fmt.Sprintf("${%s}", re.SubexpNames()[3])
 			matchedRemotePort := fmt.Sprintf("${%s}", re.SubexpNames()[4])
-			ext = append(ext, ipAndPort{
+			extracted = append(extracted, ipAndPort{
 				localIp:    re.ReplaceAllString(scanner.Text(), matchedLocalIp),
 				localPort:  re.ReplaceAllString(scanner.Text(), matchedLocalPort),
 				remoteIp:   re.ReplaceAllString(scanner.Text(), matchedRemoteIp),
@@ -42,5 +40,5 @@ func extractLines(filename string) (ext extracted) {
 			})
 		}
 	}
-	return ext
+	return
 }
