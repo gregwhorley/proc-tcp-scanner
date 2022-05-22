@@ -1,5 +1,4 @@
-.PHONY: build
-build:
+build/pts:
 	go build -o build/pts -v ./...
 
 .PHONY:test
